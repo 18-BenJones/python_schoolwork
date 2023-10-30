@@ -1,9 +1,10 @@
 import math
 tmp = ""
-p = [[],[]] #point 1 lat and long, point 2 lat and long 
-Rad = 6371000
-a = 0.0
-c = 0.0
+lat = [] 
+long = [] 
+RAD = 6371000 #radius in metres
+tmp2 = 0.0 # used to store the input for the arcsine to make code look clearer
+dist = 0.0
 
 print("Use negative for south/west")
 
@@ -11,24 +12,28 @@ for i in range(0,2):
     print("Please enter the latitude for point ", i+1)
     tmp = input()
     try:
-        p[i].append(float(tmp))
+        lat.append(float(tmp))
     except:
         print("All inputs to this programs must be numeric! Last Warning!")
         print("Please enter the latitude for point ", i+1)
         tmp = input()
-        p[i].append(float(tmp))
+        lat.append(float(tmp))
 
 for i in range(0,2):
     print("Please enter the longtidue for point ", i+1)
     tmp = input()
     try:
-        p[i].append(float(tmp))
+        long.append(float(tmp))
     except:
         print("All inputs to this programs must be numeric! Last Warning!")
         print("Please enter the longditude for point ", i+1)
         tmp = input()
-        p[i].append(float(tmp))
+        long.append(float(tmp))
 
+# haversine formula solving for distance; https://en.wikipedia.org/wiki/Haversine_formula
+# math.asin() is the arcsine trig function
+tmp2 = (math.sin((lat[1]-lat[0])/2) ** 2) + (math.cos(lat[0]) * math.cos(lat[1])* (math.sin((long[1]-long[0])/2) ** 2))
+tmp2 = math.sqrt(tmp2)
+dist = 2 * RAD * (math.asin(tmp2))
+print("The distance between the 2 points is: \n", dist//1000, " KM")
 
-a = ((math.sin()) ** 2)
-# use harversine
